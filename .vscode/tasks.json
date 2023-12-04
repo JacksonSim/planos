@@ -1,0 +1,45 @@
+{
+  "tasks": [
+    {
+      "label": "MakeMigrations",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "manage.py",
+        "makemigrations",
+        "--noinput"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Migrate",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "manage.py",
+        "migrate",
+        "--noinput"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "RunServer",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "manage.py",
+        "runserver"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

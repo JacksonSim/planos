@@ -36,7 +36,9 @@
             <span class="me-1 text-decoration-line-through">De R$ {{ plano.plan_valor|floatformat:2 }}</span>
             {% for acordo in plano.acordos %}
             {% if acordo.acor_fid.fid_qtdemeses == 12 %}
-            <span class="fs-5">Por: R$ {{ acordo.acor_valor|floatformat:2 }}</span class="fs-5">
+            <span class="fs-5">Por: R$ {{ acordo.acor_valor|floatformat:2 }}</span>
+            <span class="fs-9">economize: R$ {{ acordo.economia|floatformat:2 }}</span class="fs-5">
+            
             {% endif %}
             {% endfor %}
           </div>
