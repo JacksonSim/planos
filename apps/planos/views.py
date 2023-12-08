@@ -4,6 +4,7 @@ from .models import TblCidade, TblPlano, TblAcordos, TblItens, TblFidelidade
 
 def planos_by_city(request, cdd_id):
     city = get_object_or_404(TblCidade, cdd_id=cdd_id)
+    dados_paf = {}
     
     # Use select_related ou prefetch_related para otimizar consultas
     planos = TblPlano.objects.filter(tblabrangenciaplano__abrang_cdd=city)
@@ -16,6 +17,7 @@ def planos_by_city(request, cdd_id):
         plano.fidelidade_disponivel = TblFidelidade.objects.filter(
             tblacordos__acor_plan=plano
         )
+        
 
         for acordo in plano.acordos:
             plan_valor = acordo.acor_plan.plan_valor
@@ -23,6 +25,13 @@ def planos_by_city(request, cdd_id):
             acor_valor = acordo.acor_valor
             
             acordo.economia = (plan_valor * fid_qtdemeses) - (acor_valor * fid_qtdemeses)
+            
+            if acordo.acor_padrao == 1:
+                plano.acor_padrao = acordo
+                
+        if plano.plan_nome == 'SIM WORK 300MB':
+            ...
+    ...
 
     return render(
         request, 'planos/planos_by_city.html', {'city': city, 'planos': planos}
